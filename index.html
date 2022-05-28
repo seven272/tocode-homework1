@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Приложение Notes | Часть 1</title>
+ <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+ <div class="wrapper">
+
+  <!-- vue start -->
+
+  <div id="app">
+   <h1>{{ title }}</h1>
+
+   <form @submit="onSubmit($event)">
+    <input 
+    type="text" 
+    required
+    v-model="input.value" 
+    :placeholder="input.placeholder">
+    <button type="submit">ADD NEW NOTE</button>
+   </form>
+
+       <br>
+       <br>
+
+    <form v-if="isEdit" @submit.prevent="sendModifyNote">
+      <label for="edit">Редактирование заметки</label>
+      <br>
+      <input id="edit" type="text" placeholder="введите заметку...." v-model="valueEditedNote">
+      <button type="submit">SEND</button>
+    </form>
+
+   <div class="notes">
+    <div class="note" v-for="(note, ind) of notes" :key="ind">
+      <p>
+       {{ note.value }}
+       <button type="submit" @click="remove(ind)">&#10005;</button>
+       <button type="submit" @click="onEdit(note)">EDIT</button>
+      </p>
+      
+    </div>
+   </div>
+
+  </div>
+
+  <!-- vue end -->
+
+ </div>
+
+ <script src="./app.js"></script>
+</body>
+</html>
