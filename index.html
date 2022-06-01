@@ -22,6 +22,11 @@
     v-model="input.value" 
     :placeholder="input.placeholder">
     <button type="submit">ADD NEW NOTE</button>
+    <br>
+    <template v-if="errors">
+      <small v-for="(error, ind) of errors" :key="ind">{{ error }}</small>
+    </template>
+ 
    </form>
 
        <br>
@@ -30,8 +35,13 @@
     <form v-if="isEdit" @submit.prevent="sendModifyNote">
       <label for="edit">Редактирование заметки</label>
       <br>
-      <input id="edit" type="text" placeholder="введите заметку...." v-model="valueEditedNote">
+      <!-- v-model="valueEditedNote" -->
+      <input id="edit" type="text" placeholder="введите заметку...." v-model="this.editingNote.value">
       <button type="submit">SEND</button>
+      <br>
+      <template v-if="errors">
+        <small v-for="(error, ind) of errors" :key="ind">{{ error }}</small>
+      </template>
     </form>
 
    <div class="notes">
